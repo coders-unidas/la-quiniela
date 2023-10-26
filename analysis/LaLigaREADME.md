@@ -4,7 +4,7 @@ The aim of this project is to visualise and analyse data from La Liga in order t
 
 ## Table of Contents
 
-- [Installation & Configutation](#installation&configuration)
+- [Installation & Configuration](#installation&configuration)
 - [Credits](#credits)
 
 ## Installation & Configuration
