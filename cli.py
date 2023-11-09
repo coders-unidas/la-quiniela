@@ -79,16 +79,18 @@ if __name__ == "__main__":
         logging.info(f"Training LaQuiniela model with seasons {args.training_seasons}")
         model = models.QuinielaModel()
         training_data = io.load_historical_data(args.training_seasons)
-        model.train(training_data)
+        modified_training_data = transform_data.transform_data(training_data)
+        model.train(modified_training_data)
         model.save(settings.MODELS_PATH / args.model_name)
         print(f"Model succesfully trained and saved in {settings.MODELS_PATH / args.model_name}")
     if args.task == "predict":
         logging.info(f"Predicting matchday {args.matchday} in season {args.season}, division {args.division}")
         model = models.QuinielaModel.load(settings.MODELS_PATH / args.model_name)
         predict_data = io.load_matchday(args.season, args.division, args.matchday)
-        predict_data["pred"] = model.predict(predict_data)
+        modified_predict_data = transform_data.transform_data(predict_data)
+        modified_predict_data["pred"] = model.predict(modified_predict_data)
         print(f"Matchday {args.matchday} - LaLiga - Division {args.division} - Season {args.season}")
         print("=" * 70)
-        for _, row in predict_data.iterrows():
+        for _, row in modified_predict_data.iterrows():
             print(f"{row['home_team']:^30s} vs {row['away_team']:^30s} --> {row['pred']}")
-        io.save_predictions(predict_data)
+        io.save_predictions(modified_predict_data)
