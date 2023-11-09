@@ -1,10 +1,19 @@
 import pickle
-
+from sklearn.ensemble import GradientBoostingClassifier
+from quiniela.transform_data import transform_data
 
 class QuinielaModel:
 
     def train(self, train_data):
         # Do something here to train the model
+        transformed_data = transform_data(train_data)
+        features = ['away_team_rank','home_team_rank','matchday']
+        target = ["match_result"]
+        x_train = transformed_data[features]
+        y_train = transformed_data[target]
+
+        clf = GradientBoostingClassifier()
+        clf.fit(x_train, y_train)
         pass
 
     def predict(self, predict_data):

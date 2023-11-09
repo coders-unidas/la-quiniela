@@ -4,7 +4,7 @@ import argparse
 from datetime import datetime
 
 import settings
-from quiniela import models, io
+from quiniela import models, io, transform_data
 
 
 def parse_seasons(value):
