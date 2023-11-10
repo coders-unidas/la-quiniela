@@ -12,10 +12,11 @@ class QuinielaModel:
 
         clf = GradientBoostingClassifier()
         clf.fit(x_train, y_train)
-        return clf
+        self = clf
+        pass 
 
     def predict(self, predict_data):
-        clf_y_pred = model.predict(predict_data)
+        clf_y_pred = self.predict(predict_data)
         return clf_y_pred
 
     @classmethod
