@@ -4,7 +4,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 class QuinielaModel:
     def train(self, train_data):
         # Do something here to train the model
-        features = ['away_team_rank','home_team_rank']
+        features = ['away_team_rank','home_team_rank','matchday','away_team_matchday_rank', 'home_team_matchday_rank']
         target = ["match_result"]
         x_train = train_data[features]
         y_train = train_data[target]
@@ -14,7 +14,7 @@ class QuinielaModel:
 
 
     def predict(self, predict_data):
-        features = ['away_team_rank','home_team_rank']
+        features = ['away_team_rank','home_team_rank','matchday','away_team_matchday_rank', 'home_team_matchday_rank']
         x_predict = predict_data[features]
         clf_y_pred = self.clf.predict(x_predict)
         return clf_y_pred

@@ -162,7 +162,7 @@ def transform_data_season(df):
 
 def transform_data_both(df):
     
-    df_tochange = df.dropna(subset=['score'])
+    df_tochange = df.dropna(subset=['score']).copy()
     df_tochange["score_home_team"] = df_tochange["score"].str.split(":").str[0].astype(float)
     df_tochange["score_away_team"] = df_tochange["score"].str.split(":").str[1].astype(float)
     df_tochange["goal_difference"] = df_tochange["score_home_team"] - df_tochange["score_away_team"]
@@ -217,18 +217,18 @@ def transform_data_both(df):
     df_useful = df_tochange[['season','division','matchday','home_team','match_result','away_team']]
 
     home_team_rank = df_useful.merge(df_with_rank, left_on=['season','division', 'matchday', 'home_team'], right_on=['season','division', 'matchday', 'team'], how='left')
-    home_team_rank.rename(columns={'delayed_rank': 'home_team_rank'}, inplace=True)
+    home_team_rank.rename(columns={'delayed_rank': 'home_team_matchday_rank'}, inplace=True)
     home_team_rank.drop(columns=['team'], inplace=True)
 
     away_team_rank = df_useful.merge(df_with_rank, left_on=['season', 'division', 'matchday', 'away_team'], right_on=['season','division', 'matchday', 'team'], how='left')
-    away_team_rank.rename(columns={'delayed_rank': 'away_team_rank'}, inplace=True)
+    away_team_rank.rename(columns={'delayed_rank': 'away_team_matchday_rank'}, inplace=True)
     away_team_rank.drop(columns=['team'], inplace=True)
 
     df_new = away_team_rank.merge(home_team_rank, on=['season', 'division', 'matchday', 'home_team','away_team'], how='left')
 
     df_new.rename(columns={'match_result_x': 'match_result'},inplace=True)
 
-    df_to_train_matchday = df_new[['season','home_team','away_team','away_team_rank','home_team_rank','match_result','matchday']]
+    df_to_train_matchday = df_new[['season','home_team','away_team','away_team_matchday_rank','home_team_matchday_rank','match_result','matchday']]
     df_to_train_matchday = df_to_train_matchday.fillna(0)
 
 

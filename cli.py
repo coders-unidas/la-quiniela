@@ -87,8 +87,8 @@ if __name__ == "__main__":
         logging.info(f"Predicting matchday {args.matchday} in season {args.season}, division {args.division}")
         model = models.QuinielaModel.load(settings.MODELS_PATH / args.model_name)
         predict_data = io.load_matchday(args.season, args.division, args.matchday)
-        modified_predict_data = transform_data.transform_data_both(predict_data) #the data is transformed, once again
-        predict_data["pred"] = model.predict(modified_predict_data)
+        #modified_predict_data = transform_data.transform_data_both(predict_data) #the data is transformed, once again
+        predict_data["pred"] = model.predict(predict_data)
         print(f"Matchday {args.matchday} - LaLiga - Division {args.division} - Season {args.season}")
         print("=" * 70)
         for _, row in predict_data.iterrows():
