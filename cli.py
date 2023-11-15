@@ -79,7 +79,7 @@ if __name__ == "__main__":
         logging.info(f"Training LaQuiniela model with seasons {args.training_seasons}")
         model = models.QuinielaModel()
         training_data = io.load_historical_data(args.training_seasons)
-        modified_training_data = transform_data.transform_data_both(training_data) #here we apply the transformation of the data
+        modified_training_data = transform_data.transform_data_matchday(training_data) #here we apply the transformation of the data
         model.train(modified_training_data)
         model.save(settings.MODELS_PATH / args.model_name)
         print(f"Model succesfully trained and saved in {settings.MODELS_PATH / args.model_name}")

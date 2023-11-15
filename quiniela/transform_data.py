@@ -4,7 +4,7 @@ import numpy as np
 
 def transform_data_matchday(df):
 
-    df_tochange = df.dropna(subset=['score'])
+    df_tochange = df.dropna(subset=['score']).copy()
     df_tochange["score_home_team"] = df_tochange["score"].str.split(":").str[0].astype(float)
     df_tochange["score_away_team"] = df_tochange["score"].str.split(":").str[1].astype(float)
     df_tochange["goal_difference"] = df_tochange["score_home_team"] - df_tochange["score_away_team"]
