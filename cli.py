@@ -88,9 +88,9 @@ if __name__ == "__main__":
         model = models.QuinielaModel.load(settings.MODELS_PATH / args.model_name)
         predict_data = io.load_matchday(args.season, args.division, args.matchday)
         modified_predict_data = transform_data.transform_data(predict_data)
-        modified_predict_data["pred"] = model.predict(modified_predict_data)
+        predict_data["pred"] = model.predict(modified_predict_data)
         print(f"Matchday {args.matchday} - LaLiga - Division {args.division} - Season {args.season}")
         print("=" * 70)
-        for _, row in modified_predict_data.iterrows():
+        for _, row in predict_data.iterrows():
             print(f"{row['home_team']:^30s} vs {row['away_team']:^30s} --> {row['pred']}")
-        io.save_predictions(modified_predict_data)
+        io.save_predictions(predict_data)
