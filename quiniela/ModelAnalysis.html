@@ -99,12 +99,61 @@ model. Here below, the 4 codes and their roles are described.
 
 <hr\>
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">3. Performance of the chosen model</h2>
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">In order to study the performance of the chosen model we tried to study
+in more its predictions and their veracity. We tried to predict the outcome of the result of the season 2020-2021 training the model starting 
+with different seasons to season 2019-2020. In Figure 2 there is a graphic with the results obtained.</p>
+<center>
+     <figure><img src="images_forhtml/perf.png" alt="graphic with performance">  
+          <figcaption style="font-family: 'Arial', sans-serif;">
+          Figure 2: Scatter plot that shows the performance of the code starting the training of the model on several seasons.
+     </figcaption> </figure> </center>
+     <p style="text-align: justify; font-family: 'Arial', sans-serif;">As it can be seen in the graphic above, the model performs better
+          when being trained with data from less seasons. The difference in performance is not abysmal, but there is an improvement.
+     </p>
+     <p style="text-align: justify; font-family: 'Arial', sans-serif;">One conclusion that we arrived when studying the data in the 
+          <em>Data Analysis</em> is that there's a tendency for the home team to win more times than the away team, as it can be 
+          seen in the pie chart in Figure 3.
+     </p>
+     <center>
+          <figure><img src="images_forhtml/hometeamvsawayteam.png" alt="piechart">  
+               <figcaption style="font-family: 'Arial', sans-serif;">
+               Figure 3: Pie chart that shows in the history of <em>LaLiga</em> the percentage of times the home team wins, the away team wins
+               or if there is a tie.
+          </figcaption> </figure> </center>
+
+     <p style="text-align: justify; font-family: 'Arial', sans-serif;">In order to see if this fact affected much the predictions of our
+          model, we calculated the percentage of times that the model predicted that home team would win. In Figure 4 there are 
+          the results we found. 
+     </p>
+     <center>
+          <figure><img src="images_forhtml/homewins.png" alt="graphic with home wins">  
+               <figcaption style="font-family: 'Arial', sans-serif;">
+               Figure 4: Scatter plot that shows the percentage of times the model predicts the home team wins starting the training of 
+               the model on several seasons.
+          </figcaption> </figure> </center>
+          <p style="text-align: justify; font-family: 'Arial', sans-serif;"> As it can be seen in the figure above, there is a strong bias
+               torwards predicting the home team wins. A noticeable thing that can be observed is that this bias is weaker when dealing
+               with less data, which maybe explains that the model performs better in those conditions.
+
+          </p>  
+
 
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">4. Conclusions</h2>
 
-<p style="text-align: justify; font-family: 'Arial', sans-serif;">
-
+<p style="text-align: justify; font-family: 'Arial', sans-serif;"> We can conclude that the model, eventhough it probably won't make anybody
+     rich, works quite well since the worst performance that we observed is around 44% of success. 
 </p>
+
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">First of all, the choice of features wasn't the one we first
+     expected. We thought that a bigger number of features would bring the best results, but every test would result into a better 
+     performance of the model we chose. One possible explanation can be that maybe implementing the feature matchday 
+     doesn't really compensate the error that maybe can be brought by the rank of the season in the current day. </p> 
+
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">Another thing that we observed is that the model works best when dealing
+with less amount of data. Something that can affect this is that when the model is trained with more data, the bias torwards
+predicting that the home team will win is stronger. Another explanation is that, with a larger number of seasons, the probability
+of having teams with a rank position from the previous season with 0 increases. This fact can bring uncertainty to the model
+and, therefore, less reliability.</p>
 
 </font>
 </body>
