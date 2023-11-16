@@ -11,11 +11,11 @@ def transform_data_matchday(df):
 
     df_tochange["match_result"] = np.where(df_tochange['score_home_team'] > df_tochange['score_away_team'], '1', np.where(df_tochange['score_home_team'] < df_tochange['score_away_team'], '2', 'X'))
     
-    df_class_home = df_tochange.groupby(['division', 'season', 'matchday', 'home_team','match_result']).agg(
+    df_class_home = df_tochange.groupby(['season', 'division', 'matchday', 'home_team','match_result']).agg(
         GF_safe = pd.NamedAgg(column='score_home_team', aggfunc='sum'),
         GA_safe = pd.NamedAgg(column='score_away_team', aggfunc='sum')
         ).reset_index()
-    df_class_away = df_tochange.groupby(['division', 'season', 'matchday', 'away_team', 'match_result']).agg(
+    df_class_away = df_tochange.groupby(['season', 'division', 'matchday', 'away_team', 'match_result']).agg(
         GF_safe = pd.NamedAgg(column='score_away_team', aggfunc='sum'),
         GA_safe = pd.NamedAgg(column='score_home_team', aggfunc='sum')
         ).reset_index()
@@ -31,13 +31,13 @@ def transform_data_matchday(df):
     df_class_away.rename(columns={'away_team':'team'}, inplace=True)
     df_class_home.rename(columns={'home_team':'team'}, inplace=True)
     df_classification = df_class_away.merge(df_class_home,how='outer')
-    df_classification = df_classification.groupby(['season', 'division','matchday','team']).sum().reset_index()
+    df_classification = df_classification.groupby(['season','division', 'matchday','team']).sum().reset_index()
 
-    df_classification[['W','L','T','GF','GA']] = df_classification.groupby([ 'division','season','team'])[['W_safe','L_safe','T_safe','GF_safe','GA_safe']].cumsum()
+    df_classification[['W','L','T','GF','GA']] = df_classification.groupby([ 'season','division','team'])[['W_safe','L_safe','T_safe','GF_safe','GA_safe']].cumsum()
     df_classification['result_matchday'] = np.where(df_classification['W_safe']==1,'W',np.where(df_classification['L_safe']==1,'L','T'))
 
     for i in range(5):
-        df_classification[f"last_{i}"] = df_classification.groupby(['division','season' ,'team'])['result_matchday'].shift(i+1)
+        df_classification[f"last_{i}"] = df_classification.groupby(['season','division' ,'team'])['result_matchday'].shift(i+1)
 
     df_classification['GD'] = df_classification['GF'] - df_classification['GA']
     df_classification['Pts'] = (df_classification['W']) * 3 + df_classification['T']
@@ -70,7 +70,7 @@ def transform_data_matchday(df):
 
     df_new.rename(columns={'match_result_x': 'match_result'},inplace=True)
 
-    df_to_train = df_new[['season','home_team','away_team','away_team_rank','home_team_rank','match_result','matchday']]
+    df_to_train = df_new[['season','division','home_team','away_team','away_team_rank','home_team_rank','match_result','matchday']]
     df_to_train = df_to_train.fillna(0)
     return df_to_train
 
