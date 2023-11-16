@@ -9,11 +9,14 @@ from quiniela import transform_data
 def load_matchday(season, division, matchday):
     # this function has been changed in order to be able to implement our model, since we need data previous to the matchday
     with sqlite3.connect(settings.DATABASE_PATH) as conn:
-        data = pd.read_sql("SELECT * FROM Matches", conn)
+        data = pd.read_sql("""SELECT * FROM Matches 
+                                WHERE season = '{season}'
+                                """, conn)
+
     # seasons = all_data['season'].unique().tolist()
     # index= seasons.index(season)
     # data = all_data[(all_data['season']==seasons[index-1]) | (all_data['season']==season)].copy()
-    data = data[data['season'] == season]
+    #data = data[data['season'] == season]
     merge_colummns = ['season','division','matchday','home_team','away_team']
     data_new = transform_data.transform_data_matchday(data)
     data = pd.merge(data,data_new, how='left', on=merge_colummns)
