@@ -18,7 +18,7 @@
 <h2 style="font-family: 'Arial', sans-serif;"> 1. Introduction</h2>
 <p style="text-align: justify; font-family: 'Arial', sans-serif;"> The aim of this project is to develop a machine learning model 
 simulating a <em>Quiniela</em> game using historical data from <em>LaLiga</em>. The model can give you the predictions
-of the results of the matches for a given match day in a certain division an season.
+of the results of the matches for a given match day in a certain division and season.
 </p>
 
 <p style="text-align: justify; font-family: 'Arial', sans-serif;">
@@ -31,7 +31,7 @@ if new <em>features</em> are introduced, it will predict a certain <em>target</e
 <p style="text-align: justify; font-family: 'Arial', sans-serif;"> In the case of this project, the <em>target</em> will be whether the home team
 wins, loses or if there is a tie. The outcome of the program will be: 1 if the home team wins, 2 if the away team wins  or <em>x</em>
 if there is a tie. In order to see the performance of the model, matches which the score is already already known can be predicted,
-so the prediction can be compared with the reality and establish the fiability of the model. </p>
+so the prediction can be compared with the reality and establish the reliability of the model. </p>
 <hr\>
 
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">2. Description of the model</h2>
@@ -49,36 +49,56 @@ so the prediction can be compared with the reality and establish the fiability o
        plus the rank position of the team in division 2).
 </p>
 
-<p style="text-align: justify; font-family: 'Arial', sans-serif;"> The third feature that we introduced is the matchday. On its own,
+<p style="text-align: justify; font-family: 'Arial', sans-serif;"> The third feature that we considered is the matchday. On its own,
 it's not really relevant to the outcome of the match, but it is helpful compensating the values of the rank position in the current season
 each day. If we didn't introduced this term, the rank position in the current position in the first days of the season (when there
 is not a lot of information) would have a similar weight than the one in the last days of the season (when there is more information
 and the feature is much more useful). </p>
+<h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.1.1 Codes to study the suitability of the features</h4>
 
 <p style="text-align: justify; font-family: 'Arial', sans-serif;">In order to choose which features we chose to develop the model, we
 wrote three codes in Jupyter Notebook that can be found in the folder <em>analysis</em>. We tried to execute them with the same data,
 and we tried to predict the outcome of matches. We already know the results, so we compared what the model predicted with the reality
 to study the performance of each code and find the better option. </p>
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">The first code is called <em>first_model_matchday.ipynb</em>,
+and, in there, we trained the model with just information of the ranking of the current season with the match day. The second code, 
+<em>second_model_season.ipynb</em> is trained with just the rank position of the previous season. Finally, the third code 
+<em>third_model_both.ipynb</em> is trained with all the features.  </p> 
+ <h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.1.2 Performance of the models</h4>
 
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">In order to establish a fair comparison,
+     all of the codes are trained with data from the season 2000-2001 to the season 2019-2020, and we predicted and compared
+     the predictions with the real results with data from the season 2020-2021.In Figure 1 there is displayed a graphic that 
+     shows the performance of the three codes. </p>
+<center>
+     <figure><img src="images_forhtml/performance.png" alt="graphic with performance">  
+          <figcaption style="font-family: 'Arial', sans-serif;">
+          Figure 1: Plot bar that shows the percentage of success of the three codes.
+     </figcaption> </figure> </center>
+
+     <p style="text-align: justify; font-family: 'Arial', sans-serif;">At first glance, it can be seen that the performance is quite 
+     similar in the three codes, so we can see that the three set of features would be good choices. However, the one that shows the 
+     greater percentage of success is the second code. Due to this, we chose as features for our definite model the rank from 
+     the previous season.</p>
 
 <h3 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.2 Description of the codes </h3>
 <p style="text-align: justify; font-family: 'Arial', sans-serif;">
-The model consists on 4 codes that are conected between each other, and each one has a certain role in the performance of the 
+The model consists on 4 codes that are connected between each other, and each one has a certain role in the performance of the 
 model. Here below, the 4 codes and their roles are described.
 
 </p>
-<h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> - First code: <em>transform_data.py</em> </h4>
+<h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.2.1 First code: <em>transform_data.py</em> </h4>
 <p style="text-align: justify; font-family: 'Arial', sans-serif;"> This code was not in the initial codes given at the beginning 
      of the project. Its main goal is to, as it's implied in its name, to transform the data from the given data frame so we 
-     could obtain the features that we needed to implement in our model. 
-
+     could obtain the data from the features that we needed to implement in our model. 
 </p>
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">First</p>
 
 
 
 
 <hr\>
-<h2 style="text-align: justify; font-family: 'Arial', sans-serif;">3. Performance of the code</h2>
+<h2 style="text-align: justify; font-family: 'Arial', sans-serif;">3. Performance of the chosen model</h2>
 
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">4. Conclusions</h2>
 
