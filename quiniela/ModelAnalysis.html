@@ -36,9 +36,29 @@ so the prediction can be compared with the reality and establish the fiability o
 
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">2. Description of the model</h2>
 <h3 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.1 Features </h3>
-<p style="text-align: justify; font-family: 'Arial', sans-serif;"> The features of this code are bla bla bla
-
+<p style="text-align: justify; font-family: 'Arial', sans-serif;"> We have established three candidate features for our model that are
+     features related to the outcome of the matches. The first feature is which team is home team and which one is away team. 
+     During the Data Analysis of <em>LaLiga</em> we observed that the team that is playing at home has more tendency to win rather than 
+     team that is playing away, so we decided that it would be an interesting feature to take into consideration. In Figure 1 it can be
+     seen the huge tendency there is. 
+</p> 
+<center>
+<figure><img src="images_forhtml/hometeamvsawayteam.png" alt="Figure 1:">  <figcaption style="font-family: 'Arial', sans-serif;">
+     Figure 1: Pie chart showing the result distribution of all the matches in the data.
+</figcaption> </figure> </center>
+     
+<p style="text-align: justify; font-family: 'Arial', sans-serif;"> Secondly, another thing that is quite related to which team has more
+      odds of winning a match is how high or low are they in the rank position; the higher a team is positioned
+       in the rank means that in the past they performed really well. So, thinking that a team with a higher rank playing against
+       a team with a lower rank will win, is quite a safe bet. This is the login between why whe chose the following features: the rank 
+       position from the latter position and the rank position in the current season each day (in other words, how are they positioned 
+       in the rank a certain day of the season according to the matches until that day). To take into consideration the division shifts,
+       we established that the rank position in division 2 is <em>N</em>+<em>n</em> (the last rank position in division 1 of the season
+       plus the rank position of the team in division 2).
 </p>
+
+<p style="text-align: justify; font-family: 'Arial', sans-serif;">In order to choose which features we chose to develop the model, we
+did three Jupyter Notebooks that can be found in the folder <em>analysis</em>.  </p>
 
 
 <h3 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.2 Description of the codes </h3>
