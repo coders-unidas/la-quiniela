@@ -7,8 +7,7 @@ class QuinielaModel:
         features = ['away_team_rank','home_team_rank','matchday']
         target = ["match_result"]
         x_train = train_data[features]
-        y_train = train_data[target]
-        y_train = y_train.values.ravel()
+        y_train = train_data[target].values.ravel()
         self.clf = GradientBoostingClassifier()
         self.clf.fit(x_train, y_train)
 
