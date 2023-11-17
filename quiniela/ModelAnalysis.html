@@ -106,10 +106,17 @@ model. Here below, the 4 codes and their roles are described.
 <h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.3.3 Third code: <em>io.py</em> </h4>
 <p style="text-align: justify; font-family: 'Arial', sans-serif;"> 
      This file defines three different functions, each conected to the database <em>laliga.sqlite</em>, one to load the data for training the model, another to load the data for the model
-     to predict and the last one to safe the predictions in the database.
+     to predict and the last one to safe the predictions in the database. The only significal change made in this file was in the function <em>load_matchday</em> (for predicting).
+     Since, in the given software the data for predicting was just a matchday, there was no information about the previous seasons, which was the main feature
+     given to the model, and therefore the training it recieved previously would be meaningless. In order to avoid this, the function was changed in a way that it returned the same pandas
+     dataframe as before but with also the rank for each team in the previous season.
 </p>
-
-
+<h4 style="text-align: justify; font-family: 'Arial', sans-serif;"> 2.3.4 Fourth code: <em>cli.py</em> </h4>
+<p style="text-align: justify; font-family: 'Arial', sans-serif;"> 
+     This is the main exacutable. All the different arguments are defined as well as the functionalities of the train and predict arguments.
+     The only change implemented here is in line 83 and it is the implementation of the function defined in <em>transform_data.py</em> in was done in order to be able to train
+     the model using the chosen features.
+</p>
 
 <hr\>
 <h2 style="text-align: justify; font-family: 'Arial', sans-serif;">3. Performance of the chosen model</h2>
