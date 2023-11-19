@@ -3,7 +3,6 @@ from sklearn.ensemble import GradientBoostingClassifier
 
 class QuinielaModel:
     def train(self, train_data):
-        # Do something here to train the model
         features = ['away_team_rank','home_team_rank','matchday']
         target = ["match_result"]
         x_train = train_data[features]

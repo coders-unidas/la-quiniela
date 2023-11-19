@@ -11,12 +11,17 @@ def load_matchday(season, division, matchday):
     with sqlite3.connect(settings.DATABASE_PATH) as conn:
         all_data = pd.read_sql("SELECT * FROM Matches ", conn)
     
+    # We will use the season specified in the arguments and the season before that one
     seasons = all_data['season'].unique().tolist()
     index= seasons.index(season)
     data = all_data[(all_data['season']==seasons[index-1]) | (all_data['season']==season)].copy()
+
+    # Now that we have enough information the data and merge it back to the dataframe
     merge_colummns = ['season','division','matchday','home_team','away_team']
     data_new = transform_data.transform_data_matchday(data)
     data = pd.merge(data,data_new, how='left', on=merge_colummns)
+
+    #We return only the specified matchday
     data_final = data[(data['season']==season) & (data['division']==division) & (data['matchday']==matchday)].copy()
     if data_final.empty:
         raise ValueError("There is no matchday data for the values given")
